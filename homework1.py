@@ -34,7 +34,7 @@ print(trying)"""
 
 # question 1b
 def interpolate(a, b, c):
-    return c(b - a) + a 
+    return c * (b - a) + a 
 
 # had correct implementation where I returned 1. Didn't have correct logic for how to print a list. 
 # adding seq is similar to having a list where I append items to it, hence seq.append(n)
