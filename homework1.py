@@ -1,46 +1,13 @@
-"""
-Code a function clamp of type int -> int -> int -> int where clamp a b v returns v if v is between a and b (inclusively), 
-and otherwise returns the smallest of a and b if v is smaller, or the largest of a and b if v is larger. 
-In most uses, a would be the smaller value and b would be the larger value.
-"""
-
 # question 1a
-"""def clamp(a, b, v):
-    # 20 is more than 15 and 10
-    if v <= b and v <= a:
-        return v 
-    # saying same thing as above
-    elif v <= a and v <= b:
-        return min(a, b)
-    elif v >= a and v >= b:
-        return max(a, b)
-clamp(10, 15, 20)"""
-
-"""def clamp(a, b, v):
+def clamp(a, b, v):
     # determine lower and upper bounds
     low, high = min(a, b), max(a, b)
     # want it to compare max of low and v to make sure v is not lower than low and compare max to high to ensure v is not higher than high.
-    return min(high, max(low, v))"""
-
-# working and done mostly by self, chatgpt helped with debug 
-"""def repeat(s, n):
-    if n <= 0:
-        return ""
-    else: 
-        return s + repeat(s, n-1)
-
-trying = repeat("hello", 6)
-print(trying)"""
+    return min(high, max(low, v))
 
 # question 1b
 def interpolate(a, b, c):
     return c * (b - a) + a 
-
-# had correct implementation where I returned 1. Didn't have correct logic for how to print a list. 
-# adding seq is similar to having a list where I append items to it, hence seq.append(n)
-# for each recursive call, I add the seq values with numbers to the list. 
-# my logic before was to write list(collatz_sequence) but I realized after that all functions are not iterable objects so this wouldn't make sense. 
-# I can call list(collatz_sequence(n))
 
 # question 1c
 def repeat(s, n):
@@ -61,18 +28,7 @@ def collatz_sequence(n, seq=None):
     else: 
         return collatz_sequence(3*n + 1, seq)
 
-trying = collatz_sequence(19)
-#print(trying)
-
 # question 1e
-"""def sequence(i, j, step):
-    if seq is None: 
-        seq = []
-    seq.append(zip (i, j))
-    elif i < j and step > 0:
-        return i + sequence(step, seq)
-    elif i > j and step > 0:
-        return i + sequence(step, seq)"""
 def sequence(i, j, step):
    seq = []
    while i != j:
@@ -93,9 +49,6 @@ def pairneg(lst):
     else: 
         return [[lst[0], -lst[0]]] + pairneg(lst[1:])
 
-testing = pairneg([1])
-#print(testing)
-
 # question 2b
 def cap(m, lst):
     for i, num in enumerate(lst):
@@ -112,14 +65,26 @@ def prefix(s, lst):
         return []
     else: 
         return [s + x for x in prefix(s, lst[1:])]
+        
+# question 2c
+def suffix (s, lst):
+    if s == "":
+        return []
+    elif lst == []:
+        return []
+    else: 
+        return [x + s for x in suffix(s, lst[1:])]
 
 # question 2d
 def short(lst):
+    seq = []
+    seq_long = []
     for strings in lst:
         if len(strings) > 5:
-            return "too long"
+            seq_long.append(strings)
         else:
-            return strings
+            seq.append(strings)
+    return seq
 
 # question 2e
 def within(a, b, lst):
@@ -129,6 +94,7 @@ def within(a, b, lst):
             lt.append(temp)
         elif temp < a and temp > b:
             lt.append(temp)
+ 
 # question 2f
 def split(m, lst):
     lt = []
@@ -166,11 +132,6 @@ def vadd(v, w):
 
 tests = vadd([10, 20, 30], [20, 40, 60])
 #print(tests)
-"""
-def vadd(v, w, seq=None):
-    if seq is None:
-        return []
-    seq.append(zip(v, w))"""
 
 # question 3c
 import math 
