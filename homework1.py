@@ -97,28 +97,21 @@ testing = pairneg([1])
 #print(testing)
 
 # question 2b
-"""def cap(m, lst):
-    for num in lst:
-        if num >= m:
-            
-            # replace every element in lst that's greater than m with m
-        else: 
-            pass """
-
 def cap(m, lst):
     for i, num in enumerate(lst):
         if num >= m:
             lst[i] = m
     return lst
 
-testing_two = cap(5, [1, 2, 3])
-#print(testing_two)
-
 # question 2c
-"""def prefix(s, l):
-    if not l:
+def prefix(s, lst):
+    # base case
+    if lst == []:
         return []
-        """
+    if s == "":
+        return []
+    else: 
+        return [s + x for x in prefix(s, lst[1:])]
 
 # question 2d
 def short(lst):
@@ -127,9 +120,6 @@ def short(lst):
             return "too long"
         else:
             return strings
-
-testing_three = short(["hello", "world"])
-#print(testing_three)
 
 # question 2e
 def within(a, b, lst):
