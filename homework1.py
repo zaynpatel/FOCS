@@ -42,12 +42,12 @@ def interpolate(a, b, c):
 # my logic before was to write list(collatz_sequence) but I realized after that all functions are not iterable objects so this wouldn't make sense. 
 # I can call list(collatz_sequence(n))
 
-# question 1c (test after)
+# question 1c
 def repeat(s, n):
     if n <= 0:
         return ""
     else:
-        return s * repeat(n-1)
+        return s + repeat(s, n-1)
 
 # question 1d
 def collatz_sequence(n, seq=None):
@@ -62,15 +62,26 @@ def collatz_sequence(n, seq=None):
         return collatz_sequence(3*n + 1, seq)
 
 trying = collatz_sequence(19)
-print(trying)
+#print(trying)
 
 # question 1e
-def sequence(i, j, step):
-    # sequence seq to add
-    if i < j and step > 0:
+"""def sequence(i, j, step):
+    if seq is None: 
+        seq = []
+    seq.append(zip (i, j))
+    elif i < j and step > 0:
         return i + sequence(step, seq)
     elif i > j and step > 0:
-        return i + sequence(step, seq)
+        return i + sequence(step, seq)"""
+def sequence(i, j, step):
+   seq = []
+   while i != j:
+       seq.append(i)
+       i += step
+    seq.append(j)
+    return seq
+trying = sequence(10, 20, 4)
+#print(trying)
 
 # question 2a
 
