@@ -17,7 +17,7 @@ Accepts set of strings over ['x', 'y'] that contains a number of xs that is a mu
 faMod3x = {
   'state': [1, 2, 3],
   'alphabet': ['x', 'y'],
-  'delta': [(1, 'x', 2), 
+  'delta': [(1, 'x', 3), 
             (2, 'x', 3), 
             (3, 'x', 1), 
             (1, 'y', 1), 
@@ -50,8 +50,55 @@ def isFinal(m, q):
   return False
 #trying = isFinal(faMod3x, [2])
 
-# B
 
+# B* (logic partially correct, added new temp vars)
+def followSymbol(m, q, sym):
+  # specify the key we want to loop through
+  for source, label, dest in m['delta']:
+    #print(source, label, dest)
+    if source == q and label == sym:
+      print(dest)  
+      return dest
+  return []
+trying = followSymbol(faMod3x, 3, 'x')
+print(trying)
+
+# C
+"""    followString faMod3X 1 ['x'; 'y'; 'x'; 'y'; 'x'];;
+- : int list = [1]"""
+"""def followString(m, q, syms):
+  for states in range(syms):
+    followSymbol(m, q, states)"""
+
+#trying = followString(faMod3x, 1, ['x'])
+#print(trying)
+
+
+# Question 2 - Finite state machine pictures on github
+"""
+* Only including self.alphabet and self.start because they are needed to initialize the FSM. Accepting state, transition are two separate functions we can initialize later.
+
+__init__ is typically used to prepare a class for 'use'
+
+
+"""
+"""class FA_A: 
+  # used to set up the initial parts of FSM (alphabet and start)
+  def __init__(self):
+    self.alphabet = ['a', 'b', 'c']
+    self.start = 0
+  # two final states accepted in this machine
+  def is_accepting(self, state):
+    return state == 0 or state == 1
+  def transition(self, state, symbol):
+    length = state + (1 if symbol in self.alphabet else 0)
+    return length % 3
+
+import random
+def recognize(fa_a, n):
+  for i in range(n):
+    # random.choice() returns randomly selected element from sequence
+    length = random.choice([])"""
 
 # Question 3
 # A 
