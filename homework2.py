@@ -17,7 +17,7 @@ Accepts set of strings over ['x', 'y'] that contains a number of xs that is a mu
 faMod3x = {
   'state': [1, 2, 3],
   'alphabet': ['x', 'y'],
-  'delta': [(1, 'x', 3), 
+  'delta': [(1, 'x', 2), 
             (2, 'x', 3), 
             (3, 'x', 1), 
             (1, 'y', 1), 
@@ -56,23 +56,33 @@ def followSymbol(m, q, sym):
   # specify the key we want to loop through
   for source, label, dest in m['delta']:
     #print(source, label, dest)
-    if source == q and label == sym:
-      print(dest)  
+    if source == q and label == sym:  
       return dest
   return []
-trying = followSymbol(faMod3x, 3, 'x')
-print(trying)
+#trying = followSymbol(faMod3x, 3, 'x')
 
 # C
-"""    followString faMod3X 1 ['x'; 'y'; 'x'; 'y'; 'x'];;
-- : int list = [1]"""
-"""def followString(m, q, syms):
-  for states in range(syms):
-    followSymbol(m, q, states)"""
+def followString(m, q, syms):
+    # new var equal to state param
+    state = q
+    # update the value of state as it loops through the list of symbols
+    for sym in syms:
+        state = followSymbol(m, state, sym)
+        if not state:
+            return []
+  # return as a 1 item list  
+  return [state]
 
 #trying = followString(faMod3x, 1, ['x'])
-#print(trying)
 
+# D
+def accept(m, s):
+    # Start from the initial state of m
+    state = m['start']
+    # Follow the transitions of m labeled by the symbols in s
+    final_state = followString(m, state, list(s))
+    # Check if the final state is in the set of accept states of m
+    return final_state in m['accept']
 
 # Question 2 - Finite state machine pictures on github
 """
