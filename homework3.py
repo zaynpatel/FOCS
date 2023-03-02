@@ -67,7 +67,100 @@ def pairs(xs, ys):
     
 
 trying = pairs([1, 2], ['a', 'b', 'c'])
-print(trying)
 
 # Question 2
 # A 
+
+
+# practice
+# 1* (always use temporary variables when appending the loop)
+# if .append((a, b)) -> this would append the lists, not the indexes as the problem stated
+def prob_one(a, b):
+  new_list_c = []
+  for temp in a:
+    for temps in b:
+      prob_one.append((temp, temps))
+  return new_list_c
+
+# 2
+def triangles(n):
+  for i in range(1, n+1):
+    print("*" * i)
+
+#trying = triangles(17)
+
+# 3
+"""
+Prompt: Given two input lists a and b, write a function common_digits(a, b) that returns a list of all pairs of numbers (x, y) where x and y have at least one digit in common. 
+"""
+# wrong implementation - would return numbers not digits. I knew this so I built commoner digits.
+def common_digits(a, b):
+  result = []
+  for num in a:
+    for nums in b:
+      if num in nums:
+        result.append((num, nums))
+  return result 
+
+# not looping over digits. I'm looping over the digits of the number. In other words, the output won't be correct because the loop isn't doing the correct thing.
+"""def commoner_digits(a, b):
+  results = []
+  for num in a:
+    for nums in num:
+      for numbers in b:
+        for numeros in numbers:
+          results.append((nums, numeros))"""
+
+# can also implement this with sets instead. still ugly but built-in set types of no duplicates means we don't need to check (if digit == digit 2)
+def commoner_digits(a, b):
+  results = []
+  for num in a:
+    # added str(num) because this allows us to loop through individual digits. can't do it with numbers. 
+    for digit in str(num):
+      for nums in b:
+    # same idea here with type change. 
+        for digit2 in str(nums):
+          if digit == digit2:
+            results.append((num, nums))
+            # break because we only need one digit to   confirm
+            break
+  return results
+
+# more practice - except with map, filter, reduce
+#1 (recall sum, len for line 137 - which method should be here?)
+def count_vowels(string):
+  vowels = ['a', 'e', 'i', 'o', 'u']
+  final = []
+  for vowel in string:
+    if vowel in vowels:
+      final.append(vowel)
+  return len(vowel)
+
+"""
+from functools import reduce
+
+def count_vowels(string):
+  vowels = ['a', 'e', 'i', 'o', 'u']
+  filtered = filter(lambda x: x in vowels, string) -> filter for x (a func parameter) that is in vowels. ,string sharing that you're going to filter on the string input parameter
+
+  return reduce(lambda x, y: x + 1, filtered, 0) -> reduce combines the elements of an input iterable into a single result. so here it's incrementing by 1 for the items in filtered and will return a value at the end.
+"""
+
+#2 
+def double_odd(nums):
+  filtered = filter(lambda x: x % 2 != 0, nums)
+  mapping = list(map(lambda x: x * 2, filtered))
+  print(mapping)
+
+#3* (add x + y because of sum. obvious)
+from functools import reduce
+def sum_squares(nums):
+  mapping = list(map(lambda x: x*x, nums))
+  return reduce(lambda x, y: x + y, mapping, 0)
+
+#4
+def capitalize_words(words):
+  mapping = list(map(lambda cap: cap.capitalize(), words))
+  return mapping 
+
+#5
