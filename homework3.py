@@ -64,13 +64,58 @@ def pairs(xs, ys):
     for y in ys:
       result.append((x, y))
   return result 
-    
 
 trying = pairs([1, 2], ['a', 'b', 'c'])
 
 # Question 2
-# A 
+# A* (wrapped a in a list so the type was accepted, wasn't going to concatenate the lists otherwise. I can feed a in as an int but because of the function running, it's converted to a list) 
+def prepend_to_all(a, xss):
+  return list(map(lambda x: [a] + x, xss))
 
+#trying = prepend_to_all(1, [[66]])
+
+#B* (remember that order of el in 83 should abide by the order of el in 73 -> pass same param-like objects in to the HOF)
+def prefixes(xs):
+  # empty list is a prefix of any list, hence why empty list is initialized with result
+  result = [[]]
+  for item in xs:
+    result.append(prepend_to_all(item, result))
+  return result
+#trying = prefixes([1])
+
+#C 
+# helper function define
+def helper_reverse(lst):
+  return lst[::-1]
+
+def suffixes(xs):
+  result = [[]]
+  for item in xs:
+    result.append(prepend_to_all(item, result))
+  return helper_reverse(result)
+
+#D 
+from itertools import combinations
+def partitions(lst):
+  result = [[]]
+  n = len(lst)
+  for i in range(n+1):
+    # from combinations formula: n, k. n is the number of lists in the function parameter, k is the number of 'choosing' objects. k is represented by i in this function. 
+    for combo in combinations(lst, i):
+      xs1 = list(combo) 
+      xs2 = [x for x in lst if x not in xs1]
+      result.append((xs1, xs2))
+  return result 
+
+#E*
+def insert(x, xs):
+  result = []
+  # loop through to find all possible partions of the inserted list
+  for p in partitions(xs):
+    # loops through the partitions and inserts [x] into the current partition
+    for i in range(len(p)+1):
+      result.append(p[:i] + [x] + p[i:])
+  return result 
 
 # practice
 # 1* (always use temporary variables when appending the loop)
@@ -152,7 +197,7 @@ def double_odd(nums):
   mapping = list(map(lambda x: x * 2, filtered))
   print(mapping)
 
-#3* (add x + y because of sum. obvious)
+#3* (add x + y because of sum. obvious.)
 from functools import reduce
 def sum_squares(nums):
   mapping = list(map(lambda x: x*x, nums))
@@ -163,4 +208,13 @@ def capitalize_words(words):
   mapping = list(map(lambda cap: cap.capitalize(), words))
   return mapping 
 
-#5
+#5*
+def reverse(string):
+  words = string.split()
+  reversed_words = map(lambda x: x[::-1], words)
+  return ' '.join(reversed_words)
+
+#6
+def string_list(lst):
+  mapping = list(map(lambda x: len(x), lst))
+  return mapping
