@@ -208,7 +208,7 @@ def run_cpu(program):
       registers["DIFF"] = abs(registers[reg1] - registers[reg2])
       # compute the first two abs value, store it, and compare it to register Z
       if registers["DIFF"] == registers["Z"]:
-                registers["Z"] = 1
+        registers["Z"] = 1
       else:
         registers["Z"] = 0
     elif op == "FALSE":
@@ -220,7 +220,9 @@ def run_cpu(program):
   # Return True or False based on the value of register "Z"
   # question 2: return True if registers["Z"] == 1 else False
   #return True if registers["Z"] == 1 and registers["MAX"] == registers["Z"] else False
-  return True if registers["Z"] == 1 and registers["DIFF"] == registers["Z"] else False
+  return True if registers["Z"] == 1 and registers["DIFF"] == registers[
+    "Z"] else False
+
 
 def label_to_pc(program, label):
   # iterates through program (same p_plus that's labelled above but assigns an index for each item in the list)
@@ -255,32 +257,152 @@ p_sub = [{
 result = run_cpu(p_sub)
 #print(result)
 
-p_max = [
-    {"REGISTER": ("X", 5)},
-    {"REGISTER": ("Y", 3)},
-    {"REGISTER": ("Z", 4)},
-    {"MAX": ("X", "Y")},
-    {"CMP": ("Z", "MAX")},
-    {"JZ": "done"},
-    {"FALSE": None},
-    {"LABEL": "done"},
-    {"TRUE": None}
-]
+p_max = [{
+  "REGISTER": ("X", 5)
+}, {
+  "REGISTER": ("Y", 3)
+}, {
+  "REGISTER": ("Z", 4)
+}, {
+  "MAX": ("X", "Y")
+}, {
+  "CMP": ("Z", "MAX")
+}, {
+  "JZ": "done"
+}, {
+  "FALSE": None
+}, {
+  "LABEL": "done"
+}, {
+  "TRUE": None
+}]
 result = run_cpu(p_max)
 #print(result)
 
-p_diff = [
-    {"REGISTER": ("X", 7)},
-    {"REGISTER": ("Y", 3)},
-    {"REGISTER": ("Z", 4)},
-    {"SUB": ("X", "Y")},
-    {"DIFF": ("Z", "SUB")},
-    {"CMP": ("Z", "DIFF")},
-    {"JZ": "done"},
-    {"FALSE": None},
-    {"LABEL": "done"},
-    {"TRUE": None}
-]
+p_diff = [{
+  "REGISTER": ("X", 7)
+}, {
+  "REGISTER": ("Y", 3)
+}, {
+  "REGISTER": ("Z", 4)
+}, {
+  "SUB": ("X", "Y")
+}, {
+  "DIFF": ("Z", "SUB")
+}, {
+  "CMP": ("Z", "DIFF")
+}, {
+  "JZ": "done"
+}, {
+  "FALSE": None
+}, {
+  "LABEL": "done"
+}, {
+  "TRUE": None
+}]
 
 result = run_cpu(p_diff)
 #print(result)
+
+# Question 3
+# A*
+"""
+This question asked about how to return a value that's double the value of the value in the first register via a bool T/F. 
+
+No instructions in the run_cpu function need to be changed as it already compares the args. However, the program I write compares Y and X after adding X and X together.
+"""
+p_double = [{
+  "REGISTER": ("X", 5)
+}, {
+  "REGISTER": ("Y", 10)
+}, {
+  "ADD": ("X", "X")
+}, {
+  "CMP": ("Y", "X")
+}, {
+  "JZ": "done"
+}, {
+  "FALSE": None
+}, {
+  "LABEL": "done"
+}, {
+  "TRUE": None
+}]
+
+result = run_cpu(p_double)
+#print(result) 
+
+# B 
+p_times = [{
+  "REGISTER": ("X", 2)
+}, {
+  "REGISTER": ("Y", 5)
+}, {
+  "REGISTER": ("Z", 10)
+}, {
+  "TIMES": ("X", "Y")
+}, {
+  "DIFF": ("Z", "TIMES")
+}, {
+  "CMP": ("Z", "DIFF")
+}, {
+  "JZ": "done"
+}, {
+  "FALSE": None
+}, {
+  "LABEL": "done"
+}, {
+  "TRUE": None
+}]
+"""
+elif op == "TIMES":
+  reg1, reg2 = args
+  registers["TIMES"] = registers[reg1] * registers[reg2]
+
+-> code I can add to the run_cpu function
+-> also add a return registers["Z"] == 1 statement
+"""
+
+# C
+p_square = [{
+  "REGISTER": ("X", 2)
+}, {
+  "REGISTER": ("Y", 4)
+}, {
+  "TIMES": ("X", "X")
+}, {
+  "CMP": ("Y", "X")
+}, {
+  "JZ": "done"
+}, {
+  "FALSE": None
+}, {
+  "LABEL": "done"
+}, {
+  "TRUE": None
+}]
+
+# D
+p_square = [{
+  "REGISTER": ("X", 0)
+}, {
+  "REGISTER": ("Y", 2)
+}, {
+  "SQUARE_X_2": ("X", "Y")
+}, {
+  "CMP": ("Y", "X")
+}, {
+  "JZ": "done"
+}, {
+  "FALSE": None
+}, {
+  "LABEL": "done"
+}, {
+  "TRUE": None
+}]
+
+"""
+elif op == "SQUARE_X_2":
+  reg1, reg2 = args
+  registers[reg2] = (registers[reg1] * registers[reg1]) + (registers[reg1]) + 2
+"""
