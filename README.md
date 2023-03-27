@@ -1,6 +1,8 @@
 # FOCS
 
-OCaml Notes and FOCS HW from @olin course
+OCaml Notes and HW from Foundations of Computer Science at Olin College of Engineering
+
+Professor: Riccardo Pucella
 
 [Homework 1:](https://github.com/zaynpatel/FOCS/blob/main/homework1.py) Introduction to OCaml and puzzle exercises
 
