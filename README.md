@@ -11,3 +11,5 @@ Professor: Riccardo Pucella
 [Homework 3:](https://github.com/zaynpatel/FOCS/blob/main/homework3.py) Higher Order Functions
 
 [Homework 5:](https://github.com/zaynpatel/FOCS/blob/main/homework5.py) CPU Simulator
+
+[Homework 6:](https://github.com/zaynpatel/FOCS/tree/main/homework6) Production Grammers (Context-Free)
